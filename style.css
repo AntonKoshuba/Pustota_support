@@ -22,34 +22,40 @@ body {
     color: white;
     position: relative;
     max-width: 540px;
-    min-height: 100%;
+    min-height: 100vh;
     margin: 0 auto;
     font-family: 'Suisse';
     box-sizing: border-box;
-    padding: 36px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
+    gap: 16px;
 }
 
 .logo {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 20px;
     margin: 0;
+    flex-shrink: 0;
 }
 
 .button {
     height: 40px;
-    padding: 10px;
+    padding: 10px 16px;
     box-sizing: border-box;
     border: 1px solid white;
     text-align: center;
     font-size: 14px;
     cursor: pointer;
     transition: opacity 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .button:hover {
@@ -59,19 +65,76 @@ body {
 .image {
     width: 80%;
     display: block;
-    margin: 60px auto 50px;
+    margin: 40px auto 30px;
+    max-width: 100%;
 }
 
 .advice {
-    font-size: 42px;
+    font-size: 36px;
     font-weight: bold;
-    line-height: 1.1;
-    margin-bottom: 70px;
+    line-height: 1.2;
+    margin-bottom: auto;
+    min-height: 60px;
 }
 
 .footer {
-    font-size: 16px;
-    margin: 0;
-    position: absolute;
-    bottom: 36px;
+    font-size: 14px;
+    margin: 40px 0 0 0;
+    padding-top: 20px;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 16px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .button {
+        font-size: 12px;
+        padding: 8px 12px;
+        height: 36px;
+    }
+
+    .image {
+        margin: 30px auto 20px;
+    }
+
+    .advice {
+        font-size: 28px;
+    }
+
+    .footer {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    body {
+        padding: 12px;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .button {
+        font-size: 11px;
+        padding: 6px 10px;
+        height: 32px;
+    }
+
+    .image {
+        margin: 20px auto 15px;
+    }
+
+    .advice {
+        font-size: 24px;
+    }
+
+    .footer {
+        font-size: 11px;
+    }
 }

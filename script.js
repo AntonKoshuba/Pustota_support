@@ -13,27 +13,50 @@
             { text: 'ну и что там еще из эпичного?' }
         ];
 
-function getRandomElement(arr) {
-  let randIndex = Math.floor(Math.random() * arr.length);
-  return arr[randIndex];
-}
-
 let button = document.querySelector('.button');
 let phrase = document.querySelector('.phrase');
 let advice = document.querySelector('.advice');
 let image = document.querySelector('.image');
 
-button.addEventListener('click', function () {
-  let randomElement = getRandomElement (phrases);
-  smoothly (phrase, "textContent", randomElement.text)
+let usedIndices = [];
+let autoplayInterval;
 
-  if (randomElement.text.length > 40) {
+function getRandomElementWithoutRepeat() {
+  if (usedIndices.length === phrases.length) {
+    usedIndices = [];
+  }
+  
+  let randIndex;
+  do {
+    randIndex = Math.floor(Math.random() * phrases.length);
+  } while (usedIndices.includes(randIndex));
+  
+  usedIndices.push(randIndex);
+  return phrases[randIndex];
+}
+
+function displayPhrase(phraseObj) {
+  smoothly(phrase, "textContent", phraseObj.text);
+  
+  if (phraseObj.text.length > 40) {
     advice.style.fontSize = '33px';
   } else {
     advice.style.fontSize = '42px';
   }
+}
+
+function startAutoplay() {
+  displayPhrase(getRandomElementWithoutRepeat());
+  
+  autoplayInterval = setInterval(function() {
+    displayPhrase(getRandomElementWithoutRepeat());
+  }, 4000);
+}
+
+button.addEventListener('click', function () {
+  clearInterval(autoplayInterval);
+  displayPhrase(getRandomElementWithoutRepeat());
+  startAutoplay();
 });
 
-for (let i = 0; i <= 2; i = i + 1) {
-  smoothly(phrase, "textContent", phrases[i].text);
-}
+startAutoplay();
