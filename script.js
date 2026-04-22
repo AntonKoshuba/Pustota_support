@@ -1,17 +1,17 @@
 
- let phrases = [
-            { text: 'ты не один в пустоте' },
-            { text: 'чувствую любовь' },
-            { text: 'чувствую благодраность' },
-            { text: 'чувствую любовь и благодарность' },
-            { text: 'благодать-то какая' },
-            { text: 'твои слова вызывают во мне раздражение' },
-            { text: 'бесишь, что ты прав' },
-            { text: 'нет приглашения — нечего решать' },
-            { text: 'могло быть хуже и стало' },
-            { text: 'хочу об тебя поговорить' },
-            { text: 'ну и что там еще из эпичного?' }
-        ];
+let phrases = [
+  { text: 'ты не один в пустоте' },
+  { text: 'чувствую любовь' },
+  { text: 'чувствую благодарность' },
+  { text: 'чувствую любовь и благодарность' },
+  { text: 'благодать-то какая' },
+  { text: 'твои слова вызывают во мне раздражение' },
+  { text: 'бесишь, что ты прав' },
+  { text: 'нет приглашения - нечего решать' },
+  { text: 'могло быть хуже и стало' },
+  { text: 'хочу об тебя поговорить' },
+  { text: 'ну и что там еще из эпичного?' }
+];
 
 let button = document.querySelector('.button');
 let phrase = document.querySelector('.phrase');
@@ -36,8 +36,8 @@ function getRandomElementWithoutRepeat() {
 }
 
 function displayPhrase(phraseObj) {
-  smoothly(phrase, "textContent", phraseObj.text);
-  
+  smoothly(phrase, 'textContent', phraseObj.text);
+
   if (phraseObj.text.length > 40) {
     advice.style.fontSize = '33px';
   } else {
@@ -45,18 +45,19 @@ function displayPhrase(phraseObj) {
   }
 }
 
-function startAutoplay() {
+function showNextPhrase() {
   displayPhrase(getRandomElementWithoutRepeat());
-  
-  autoplayInterval = setInterval(function() {
-    displayPhrase(getRandomElementWithoutRepeat());
-  }, 4000);
+}
+
+function startAutoplay() {
+  clearInterval(autoplayInterval);
+  autoplayInterval = setInterval(showNextPhrase, 4000);
 }
 
 button.addEventListener('click', function () {
-  clearInterval(autoplayInterval);
-  displayPhrase(getRandomElementWithoutRepeat());
+  showNextPhrase();
   startAutoplay();
 });
 
+showNextPhrase();
 startAutoplay();
